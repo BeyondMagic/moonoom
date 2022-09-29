@@ -19,6 +19,6 @@ uninstall:
 
 build:
 	mkdir -p ${DESTDIR}/bin
-	g++   ./source/main.cpp $(CPP_VERSION) $(CPP_FLAGS) $(CPP_LIBS) -o ./bin/$(NAME_PROGRAM)-$(VERSION)
+	g++   ./source/main.c++ $(CPP_VERSION) $(CPP_FLAGS) $(CPP_LIBS) -o ./bin/$(NAME_PROGRAM)-$(VERSION)
 
 .PHONY: all build install clean uninstall
