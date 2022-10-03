@@ -1,5 +1,3 @@
-
-
 // Configuration files.
 #include "options.hpp"
 #include "config.hpp"

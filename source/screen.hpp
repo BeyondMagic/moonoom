@@ -22,48 +22,9 @@ namespace Screen
     auto screen = ftxui::ScreenInteractive::Fullscreen();
 
     // Define the document.
-    auto document = ftxui::Container::Vertical({
+    auto document = ftxui::Container::Horizontal({
         
         ftxui::text("left") | ftxui::flex | ftxui::border,
-
-        // Space for lanes.
-        ftxui::hbox({
-
-            // A.
-            ftxui::vbox({ 
-              ftxui::text("        ") | ftxui::flex_grow,
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second),
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second)
-            }) | ftxui::flex_grow,
-
-            ftxui::separatorCharacter(" "),
-
-            // B.
-            ftxui::vbox({
-              ftxui::text("        ") | ftxui::flex_grow,
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second),
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second)
-            }) | ftxui::flex_grow,
-
-            ftxui::separatorCharacter(" "),
-            
-            // C.
-            ftxui::vbox({
-              ftxui::text("        ") | ftxui::flex_grow,
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second),
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second)
-            }) | ftxui::flex_grow,
-
-            ftxui::separatorCharacter(" "),
-
-            // D.
-            ftxui::vbox({
-              ftxui::text("        ") | ftxui::flex_grow,
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second),
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second)
-            }) | ftxui::flex_grow,
-
-        }) | ftxui::border,
 
         ftxui::text("right") | ftxui::flex | ftxui::border,
 
@@ -72,6 +33,8 @@ namespace Screen
 
     //Render(screen, document);
     screen.Loop(document);
+
+
 
   }
 

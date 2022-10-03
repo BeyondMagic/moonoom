@@ -1,5 +1,5 @@
 #include "main.hpp"
-//#include <future>
+#include <future>
 
 //int main(int argc, const char* argv[]) {
 //  auto screen = ftxui::ScreenInteractive::TerminalOutput();
@@ -11,9 +11,11 @@
 auto main (const int argc, const char ** argv) -> int
 {
 
+  // 1.
   if (Options::Parse(argc, argv))
     return EXIT_FAILURE;
 
+  // 2.
   Music music;
 
   music.option("input-default-bindings", "yes");
@@ -21,7 +23,11 @@ auto main (const int argc, const char ** argv) -> int
   music.option("osc", MPV_FORMAT_FLAG, 1);
   music.initialise();
 
+  // 3.
+  auto playing = std::async(&Music::play, music, Options::song);
+
   //Screen::setup();
-  music.play(Options::song);
+
+  playing.get();
 
 }
