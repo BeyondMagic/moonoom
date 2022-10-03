@@ -6,54 +6,72 @@
 #include "ftxui/dom/elements.hpp"
 #include "ftxui/screen/screen.hpp"
 #include "ftxui/screen/string.hpp"
+#include "ftxui/component/captured_mouse.hpp"      // for ftxui
+#include "ftxui/component/component.hpp"           // for Slider
+#include "ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
 
 #include "config.hpp"
 
-namespace Screen {
+namespace Screen
+{
 
-  void setup () {
+  auto setup () -> void
+  {
 
     // For the whole screen.
-    auto screen = ftxui::Screen::Create(
-      ftxui::Dimension::Full(),
-      ftxui::Dimension::Full()
-    );
+    auto screen = ftxui::ScreenInteractive::Fullscreen();
 
     // Define the document.
-    ftxui::Element document = ftxui::hbox({
+    auto document = ftxui::Container::Vertical({
         
-        ftxui::text("left") | ftxui::bgcolor(ftxui::Color::Red1)  | ftxui::border,
+        ftxui::text("left") | ftxui::flex | ftxui::border,
 
         // Space for lanes.
-        ftxui::vbox({
-          ftxui::text("volcano") | ftxui::border | ftxui::flex,
+        ftxui::hbox({
 
-          // Lanes.
-          ftxui::hbox({
+            // A.
+            ftxui::vbox({ 
+              ftxui::text("        ") | ftxui::flex_grow,
+              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second),
+              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second)
+            }) | ftxui::flex_grow,
 
-              // A.
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::a.second),
+            ftxui::separatorCharacter(" "),
 
-              // A.
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::b.second),
+            // B.
+            ftxui::vbox({
+              ftxui::text("        ") | ftxui::flex_grow,
+              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second),
+              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second)
+            }) | ftxui::flex_grow,
 
-              // A.
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::c.second),
+            ftxui::separatorCharacter(" "),
+            
+            // C.
+            ftxui::vbox({
+              ftxui::text("        ") | ftxui::flex_grow,
+              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second),
+              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second)
+            }) | ftxui::flex_grow,
 
-              // A.
-              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::d.second),
+            ftxui::separatorCharacter(" "),
 
-          }) | ftxui::border
+            // D.
+            ftxui::vbox({
+              ftxui::text("        ") | ftxui::flex_grow,
+              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second),
+              ftxui::text("        ") | ftxui::bgcolor(Config::Lanes::inactive.second)
+            }) | ftxui::flex_grow,
 
-        }) | ftxui::flex_grow,
+        }) | ftxui::border,
 
-        ftxui::text("right")  | ftxui::border,
+        ftxui::text("right") | ftxui::flex | ftxui::border,
 
     });
 
 
-    Render(screen, document);
-    screen.Print();
+    //Render(screen, document);
+    screen.Loop(document);
 
   }
 

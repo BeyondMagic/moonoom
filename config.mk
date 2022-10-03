@@ -68,5 +68,9 @@ CPP_FLAGS := $(CPP_FLAGS),undefined
 #---------------------------------------------
 # -- Extra libraries to be compiled.
 
-CPP_LIBS = -I/usr/include
-CPP_LIBS := /usr/lib/libftxui-component.a /usr/lib/libftxui-dom.a /usr/lib/libftxui-screen.a -lpthread
+CPP_LIBS := -I/usr/include
+CPP_LIBS := $(CPP_LIBS) /usr/lib/libftxui-component.a
+CPP_LIBS := $(CPP_LIBS) /usr/lib/libftxui-dom.a
+CPP_LIBS := $(CPP_LIBS) /usr/lib/libftxui-screen.a
+CPP_LIBS := $(CPP_LIBS) -lpthread
+CPP_LIBS := $(CPP_LIBS) -lmpv
