@@ -11,23 +11,22 @@
 auto main (const int argc, const char ** argv) -> int
 {
 
-  // 1.
   if (Options::Parse(argc, argv))
     return EXIT_FAILURE;
 
   // 2.
-  Music music;
+  //Music music;
 
-  music.option("input-default-bindings", "yes");
-  music.option("input-vo-keyboard", "yes");
-  music.option("osc", MPV_FORMAT_FLAG, 1);
-  music.initialise();
+  ////music.option("input-default-bindings", "yes");
+  ////music.option("input-vo-keyboard", "yes");
+  ////music.option("osc", MPV_FORMAT_FLAG, 1);
+  //music.initialise();
 
-  // 3.
-  auto playing = std::async(&Music::play, music, Options::song);
+  //// 3.
+  //auto playing = std::async(&Music::play, music, Options::song);
 
-  //Screen::setup();
+  ////Screen::setup();
 
-  playing.get();
+  //playing.get();
 
 }

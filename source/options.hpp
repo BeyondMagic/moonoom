@@ -90,7 +90,7 @@ namespace Options {
       auto document = table.Render();
       auto screen = ftxui::Screen::Create(ftxui::Dimension::Fit(document));
 
-      Render(screen, document);
+      ftxui::Render(screen, document);
 
       screen.Print();
 
@@ -103,10 +103,10 @@ namespace Options {
   }
 
   static std::string song;
-  static std::string map;
+  static std::ifstream map;
 
   // -- Definitions.
-  auto Parse ( const int count, const char ** arguments) -> bool
+  inline auto Parse ( const int count, const char ** arguments) -> bool
   {
 
     args::ArgumentParser args("");
@@ -124,7 +124,7 @@ namespace Options {
     args::ValueFlag<std::string> file(args, "file", "A .osu file.", {'m', "map"});
     args::ValueFlag<std::string> music(args, "song", "A file supported by MPV.", {'s', "song"});
 
-    args::Flag help       (args, "help",       "Display this help menu.", {'h', "help"});
+    args::HelpFlag help   (args, "help",       "Display this help menu.", {'h', "help"});
     args::Flag version    (args, "version",    "Print version.",          {'v', "version"});
     args::Flag keybinding (args, "keybinding", "Display key binding.",    {'k', "key", "keybinding"});
 
@@ -157,18 +157,18 @@ namespace Options {
 
     else {
 
-      map = args::get(file);
+      auto map_path = args::get(file);
 
-      auto file_stream = std::ifstream(map);
+      map = std::ifstream(map_path);
 
-      if (!file_stream)
-        return Print::Error::file("Could not read the file '" + map + "'.");
+      if (!map)
+        return Print::Error::file("Could not read the file '" + map_path + "'.");
 
-      std::stringstream string_stream;
+      //std::stringstream string_stream;
 
-      string_stream << file_stream.rdbuf();
+      //string_stream << file_stream.rdbuf();
 
-      map = string_stream.str();
+      //map = string_stream.str();
 
     }
 
@@ -185,8 +185,6 @@ namespace Options {
         return Print::Error::song("Could not read the file '" + song + "'.");
 
     }
-
-
 
     return false;
 

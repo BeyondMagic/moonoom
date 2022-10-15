@@ -8,6 +8,7 @@ class Music {
   private:
 
     mpv_handle *ctx;
+    mpv_event *event;
   
     static inline auto check(int status) -> void
     {
@@ -66,12 +67,12 @@ auto Music::play(std::string song) -> void
 
   while (true)
   {
-    
-    mpv_event *event = mpv_wait_event(ctx, 10000);
 
-    std::cout << "event: " << mpv_event_name(event->event_id) << "\n";
+    event = mpv_wait_event(ctx, 10000);
 
-    if (event->event_id == MPV_EVENT_SHUTDOWN)
+    //std::cout << "event: " << mpv_event_name(event->event_id) << "\n";
+
+    if (event->event_id == MPV_EVENT_IDLE)
       break;
 
   }
